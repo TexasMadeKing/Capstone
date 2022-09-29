@@ -41,27 +41,30 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background: #fff;
+  background-color: #09d3ac;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.card {
-  background: rgb(50, 48, 48);
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin: 1rem;
-  padding: 1rem;
-  flex: 1 1 300px;
-  max-width: 300px;
-}
+
 
 .container {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 1rem;
+  margin: 2rem;
+}
+.container-div {
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+  /* flex-wrap: wrap;
   justify-content: center;
   margin-top: 2rem;
   background-color: #09d3ac;
-}
+} */
 
 .task-app {
   display: flex;
@@ -78,7 +81,7 @@ body {
 
 h1 {
   margin: 32px 0;
-  color: #fff;
+  color: rgb(62, 58, 58);
   font-size: 24px;
 }
 

@@ -2,7 +2,7 @@ import React from "react";
 import Task from "./Task";
 import TaskForm from "./TaskForm";
 
-function TaskList() {
+const TaskList = () => {
   const [tasks, setTasks] = React.useState([]);
 
   const addTask = task => {
