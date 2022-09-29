@@ -39,7 +39,7 @@ export default function Task({ tasks, completeTask, removeTask, updateTask }) {
                 onClick={() => setEdit({ id: task.id, value: task.text })}
                 className='edit-icon'
                 />
-                <TaskList />
+                
             </div>
             </div>
             

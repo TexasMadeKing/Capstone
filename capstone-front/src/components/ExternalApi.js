@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useAuth0 } from "../react-auth0-spa";
 import axios from "axios";
+import TaskList from "./Task/TaskList";
 
 const ExternalApi = () => {
     const [showResult, setShowResult] = useState(false);
@@ -34,11 +35,19 @@ const ExternalApi = () => {
                 This page demonstrates how to make a call to an external API.
         </p>
             <button onClick={callApi}>Ping API</button>
-            {showResult && (
+            <div
+                style={{
+                    display: showResult ? "block" : "none"
+                }}
+            >
+                <h3>The message from the API is:</h3>
+                <p>{JSON.stringify(apiMessage, null, 2)}</p>
+            </div>
+            {/* {showResult && (
                 <code>
                     <pre>{JSON.stringify(apiMessage, null, 2)}</pre>
                 </code>
-            )}
+            )} */}
         </div>
     );
 };
