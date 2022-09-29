@@ -16,32 +16,30 @@ const ExternalApi = () => {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
-            })
-            console.log(response.data)
+            });
+
+            const responseData = await response.data;
+
             setShowResult(true);
-            setApiMessage(response.data.msg);
-
+            setApiMessage(response.data);
         } catch (error) {
-            console.error({ error });
+            console.error(error);
         }
-
-    }
+    };
 
     return (
-        <>
+        <div className="container">
             <h1>External API</h1>
+            <p>
+                This page demonstrates how to make a call to an external API.
+        </p>
             <button onClick={callApi}>Ping API</button>
-            <card className="card">
-                {showResult && (
-                    <div>
-                        <h5>Result</h5>
-                        <p>{apiMessage}</p>
-                        <p>(response.data)</p>
-                    </div>
-                )}
-            </card>
-            {showResult && <code>{JSON.stringify(apiMessage, null, 2)}</code>}
-        </>
+            {showResult && (
+                <code>
+                    <pre>{JSON.stringify(apiMessage, null, 2)}</pre>
+                </code>
+            )}
+        </div>
     );
 };
 
