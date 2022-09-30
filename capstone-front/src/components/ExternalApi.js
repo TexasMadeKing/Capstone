@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useAuth0 } from "../react-auth0-spa";
 import axios from "axios";
 import TaskList from "./Task/TaskList";
@@ -28,6 +28,29 @@ const ExternalApi = () => {
         }
     };
 
+    // const callApi2 = async (text) => {
+    //     try {
+    //         const token = await getTokenSilently();
+
+    //         const response = await axios.post("http://localhost:5000/task", {
+    //             title: text,
+    //             description: 'description',
+    //             isComplete: false
+    //         }, {
+    //             headers: {
+    //                 Authorization: `Bearer ${token}`
+    //             }
+    //         });
+
+    //         const responseData = await response.data;
+
+    //         setShowResult(true);
+    //         setApiMessage(response.data);
+    //     } catch (error) {
+    //         console.error(error);
+    //     }
+    // };
+
     return (
         <div className="container">
             <h1>External API</h1>
@@ -43,13 +66,20 @@ const ExternalApi = () => {
                 <h3>The message from the API is:</h3>
                 <p>{JSON.stringify(apiMessage, null, 2)}</p>
             </div>
-            {/* {showResult && (
-                <code>
-                    <pre>{JSON.stringify(apiMessage, null, 2)}</pre>
-                </code>
-            )} */}
+            {/* <button onClick={callApi2}>Post API2</button> */}
+            <TaskList setShowResult={setShowResult} 
+                setApiMessage={setApiMessage}
+            />
+            <div
+                style={{
+                    display: showResult ? "block" : "none"
+                }}
+            >
+                <h3>The message from the API is:</h3>
+                <p>{JSON.stringify(apiMessage, null, 2)}</p>
+            </div>
         </div>
     );
-};
+}
 
 export default ExternalApi;

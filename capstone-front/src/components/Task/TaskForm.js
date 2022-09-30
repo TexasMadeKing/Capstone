@@ -15,11 +15,9 @@ function TaskForm(props) {
 
   const handleSubmit = e => {
     e.preventDefault();
+    console.log(input);
 
-    props.onSubmit({
-      id: Math.floor(Math.random() * 10000),
-      text: input
-    });
+    props.addTask(input);
     setInput('');
   };
 
@@ -35,7 +33,7 @@ function TaskForm(props) {
             ref={inputRef}
             className='task-input edit'
           />
-          <button onClick={handleSubmit} className='task-button edit'>
+          <button type="submit" className='task-button edit'>
             Update
           </button>
         </>
@@ -49,7 +47,7 @@ function TaskForm(props) {
             className='task-input'
             ref={inputRef}
           />
-          <button onClick={handleSubmit} className='task-button'>
+          <button type="submit" className='task-button'>
             Add task
           </button>
         </>

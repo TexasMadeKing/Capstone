@@ -1,19 +1,47 @@
 import React from "react";
 import Task from "./Task";
 import TaskForm from "./TaskForm";
+import { useAuth0 } from "../../react-auth0-spa";
+import axios from "axios";
 
-const TaskList = () => {
+const TaskList = (props) => {
   const [tasks, setTasks] = React.useState([]);
+  const { getTokenSilently } = useAuth0();
+  const addTask = async (text) => {
+    try {
+        const token = await getTokenSilently();
 
-  const addTask = task => {
-    if (!task.text || /^\s*$/.test(task.text)) {
-      return;
+        const response = await axios.post("http://localhost:5000/task", {
+            title: text,
+            description: 'description',
+            isComplete: false
+        }, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+
+        const responseData = await response.data;
+
+        props.setShowResult(true);
+        props.setApiMessage(response.data);
+    } catch (error) {
+        console.error(error);
     }
+    // const newTasks = [task, ...tasks];
 
-    const newTasks = [task, ...tasks];
+    // setTasks(newTasks);
+};
+  // const addTask = task => {
+  //   if (!task.text || /^\s*$/.test(task.text)) {
+  //     return;
+  //   }
 
-    setTasks(newTasks);
-  };
+  //   props.callApi2(task.text)
+  //   const newTasks = [task, ...tasks];
+
+  //   setTasks(newTasks);
+  // };
 
   const updateTask = (taskId, newValue) => {
     if (!newValue.text || /^\s*$/.test(newValue.text)) {
@@ -43,7 +71,7 @@ const TaskList = () => {
     <div>
       <h1>What's the Plan for Today?</h1>
       <TaskForm 
-      onSubmit={addTask}
+      addTask={addTask}
       tasks={tasks}
       setTasks={setTasks}
 
